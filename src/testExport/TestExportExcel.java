@@ -80,7 +80,7 @@ public class TestExportExcel<T> {
 		// 生成一个表格
 		HSSFSheet sheet = workbook.createSheet(title);
 		// 设置表格默认列宽度为15个字节
-		sheet.setDefaultColumnWidth((short) 15);
+		sheet.setDefaultColumnWidth(15);
 		// 生成一个样式
 		HSSFCellStyle style = workbook.createCellStyle();
 		// 设置这些样式
@@ -124,7 +124,7 @@ public class TestExportExcel<T> {
 		comment.setAuthor("leno");
 		// 产生表格标题行
 		HSSFRow row = sheet.createRow(0);
-		for (short i = 0; i < headers.length; i++) {
+		for (int i = 1; i < headers.length; i++) {
 			HSSFCell cell = row.createCell(i);
 			cell.setCellStyle(style);
 			HSSFRichTextString text = new HSSFRichTextString(headers[i]);
@@ -139,7 +139,7 @@ public class TestExportExcel<T> {
 			T t = (T) it.next();
 			// 利用反射，根据javabean属性的先后顺序，动态调用getXxx()方法得到属性值
 			Field[] fields = t.getClass().getDeclaredFields();
-			for (short i = 0; i < fields.length; i++) {
+			for (int i = 1; i < fields.length; i++) {
 				HSSFCell cell = row.createCell(i);
 				cell.setCellStyle(style2);
 				Field field = fields[i];
@@ -252,7 +252,7 @@ public class TestExportExcel<T> {
 			// BufferedInputStream bis = new BufferedInputStream(
 			// new FileInputStream("V://book.bmp"));
 			BufferedInputStream bis = new BufferedInputStream(
-					new FileInputStream("/home/book.bmp"));
+					new FileInputStream("WebContent/images/book.png"));
 			byte[] buf = new byte[bis.available()];
 			while ((bis.read(buf)) != -1) {
 				//
@@ -267,10 +267,10 @@ public class TestExportExcel<T> {
 					"清华出版社", buf));
 			dataset2.add(new Book(5, "c#入门", "leno", 300.33f, "1234567",
 					"汤春秀出版社", buf));
-			// OutputStream out = new FileOutputStream("E://export2003_a.xls");
-			// OutputStream out2 = new FileOutputStream("E://export2003_b.xls");
-			OutputStream out = new FileOutputStream("/home/export2003_a.xls");
-			OutputStream out2 = new FileOutputStream("/home/export2003_b.xls");
+			 OutputStream out = new FileOutputStream("E://export2003_a.xls");
+			 OutputStream out2 = new FileOutputStream("E://export2003_b.xls");
+//			OutputStream out = new FileOutputStream("/home/export2003_a.xls");
+//			OutputStream out2 = new FileOutputStream("/home/export2003_b.xls");
 			ex.exportExcel(headers, dataset, out);
 			ex2.exportExcel(headers2, dataset2, out2);
 			out.close();
